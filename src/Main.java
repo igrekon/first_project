@@ -17,7 +17,7 @@ public class Main {
 
         Person person = new Person(sizeBoard);
 
-        String castle = "\\uD83C\\uDFF0";
+        String castles = "\\uD83C\\uDFF0";
         String extralive = "❤"; // доп жизнь, ее увидеть - сразу забирай
         String monster = "\uD83D\uDC79";
 
@@ -214,7 +214,7 @@ public class Main {
         if (personLive == 0) {
             System.out.println("Закончились жизни. Итог:    " + step + " ходов");
         }
-        static boolean perliv() {
+        static boolean perliv(){
             Random p = new Random();
             int x = r.nextInt(400);
             int y = r.nextInt(400);
@@ -234,8 +234,7 @@ public class Main {
 
 
         }
-
-        static boolean shelMonster() {
+        public static boolean ShakeMonster() {
             System.out.println("Решите задачу.");
             Random k = new Random();
             int x = r.nextInt(400);
