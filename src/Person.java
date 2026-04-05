@@ -2,34 +2,64 @@
 import java.util.Random;
 
 public class Person {
-    int x, y;
-    String image = "\uD83E\uDDD9\u200D";
-    int live = 3;
-
+    protected int x, y;
+    public String image = "\uD83E\uDDD9\u200D";
+    public int live = 3;
+    Random r = new Random();
 
     Person(int sizeBoard) {
-        Random r = new Random();
         y = sizeBoard;
         int n = r.nextInt(sizeBoard);
         x = n == 0 ? 1 : n;
     }
 
-    void move(int x, int y)
-    {
+    Person(int x, int y){
         this.x = x;
         this.y = y;
     }
+    Person(){
+        this(1, 1);
+    }
 
+    public int getX(){
+        return x;
+    }
 
+    public int getY() {
+        return y;
+    }
 
+    public int getLive() {
+        return live;
+    }
+
+    public String getImage(){
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public boolean moveCorrect(int x, int y){
         return this.x == x && Math.abs(this.y - y) == 1 || this.y == y && Math.abs(this.x - x) == 1;
     }
 
-
-
-    void  downLive(){
-        this.live-=1;
+    void move(int x, int y){
+        this.x = x;
+        this.y = y;
     }
-}
+
+    public void downLive(){
+        live--;
+        public void upLive() {
+            this.live++;
+        }
+
+
+
+    }
+
+
+    }
+
