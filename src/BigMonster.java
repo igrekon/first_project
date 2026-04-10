@@ -9,9 +9,9 @@ public class BigMonster extends Monster{
         super(sizeBoard);
     }
 
-    BossMonster(int sizeBoard) {
-        super(sizeBoard);
-    }
+//    BossMonster(int sizeBoard) {
+//        super(sizeBoard);
+//    }
 
     //    @Override
     public String getImage() {

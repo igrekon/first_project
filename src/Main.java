@@ -1,8 +1,9 @@
+
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
 
     public static void main(String[] args) {
 
@@ -11,9 +12,6 @@ public class Main {
 
         Person person = new Person(sizeBoard);
         ExtraLive bonusLife = new ExtraLive(sizeBoard);
-        // Убедимся, что жизнь не спавнится на игроке (игрок обычно в углу или в центре, зависит от Person)
-
-
 
         int step = 0;
 
@@ -32,12 +30,12 @@ public class Main {
         int count = 0;
         Monster test;
         while (count <= countMonster) {
-            if (r.nextBoolean()) {
+            int type = r.nextInt(3);
+            if (type == 0) {
                 test = new Monster(sizeBoard);
-            } else if{
+            } else if (type == 1) {
                 test = new BigMonster(sizeBoard);
-            }
-            else {
+            } else {
                 test = new BossMonster(sizeBoard);
             }
 
@@ -46,15 +44,10 @@ public class Main {
                 arrMonster[count] = test;
                 count++;
             }
-
         }
-
-
-
 
         int castleX = r.nextInt(sizeBoard);
         int castleY = 0;
-
 
         board[castleY][castleX] = castle;
 
@@ -64,21 +57,27 @@ public class Main {
         String answer = sc.nextLine();
         System.out.println("Ваш ответ:\t" + answer);
 
-
-        switch (answer) {
+        switch (answer.toUpperCase()) { // Добавлен toUpperCase для удобства
             case "ДА" -> {
                 System.out.println("Выбери сложность игры(от 1 до 5):");
                 int difficultGame = sc.nextInt();
                 System.out.println("Выбранная сложность:\t" + difficultGame);
+
                 while (true) {
+                    // Проверка на количество жизней, чтобы выйти из цикла
+                    if (person.getLive() <= 0) {
+                        System.out.println("Вы проиграли! Жизни закончились.");
+                        break;
+                    }
+
                     board[person.getY() - 1][person.getX() - 1] = person.getImage();
                     outputBoard(board, person.getLive());
-                    System.out.println("Введите куда будет ходить персонаж(ход возможен только по вертикали и горизонтали на одну клетку;" +
+                    System.out.println("Введите куда будет ходить персонаж (ход возможен только по вертикали и горизонтали на одну клетку;" +
                             "\nКоординаты персонажа - (x: " + person.getX() + ", y: " + person.getY() + "))");
+
                     int x = sc.nextInt();
                     int y = sc.nextInt();
 
-                    // проверка
                     if (person.moveCorrect(x, y)) {
                         String next = board[y - 1][x - 1];
                         if (next.equals("  ") || next.equals(bonusLife.getImage())) {
@@ -96,13 +95,14 @@ public class Main {
                             break;
                         } else {
                             for (Monster monster : arrMonster) {
-                                if (monster.conflictPerson(x, y)) {
+                                if (monster != null && monster.conflictPerson(x, y)) {
                                     if (monster.taskMonster(difficultGame)) {
                                         board[person.getY() - 1][person.getX() - 1] = "  ";
                                         person.move(x, y);
-
+                                        System.out.println("Монстр побежден!");
                                     } else {
                                         person.downLive();
+                                        System.out.println("Монстр нанес урон! Осталось жизней: " + person.getLive());
                                     }
                                     break;
                                 }
@@ -111,12 +111,10 @@ public class Main {
                     } else {
                         System.out.println("Неккоректный ход");
                     }
-
                 }
-//                case "НЕТ" -> System.out.println("Жаль, приходи еще!");
-//                default -> System.out.println("Данные введены неккоректно");
             }
-
+            case "НЕТ" -> System.out.println("Жаль, приходи еще!");
+            default -> System.out.println("Данные введены некорректно");
         }
     }
 
@@ -134,27 +132,6 @@ public class Main {
         }
         System.out.println(wall);
 
-
         System.out.println("Количество жизней:\t" + live + "\n");
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
