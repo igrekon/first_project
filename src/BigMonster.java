@@ -9,6 +9,10 @@ public class BigMonster extends Monster{
         super(sizeBoard);
     }
 
+    BossMonster(int sizeBoard) {
+        super(sizeBoard);
+    }
+
     //    @Override
     public String getImage() {
         return image;
@@ -34,7 +38,7 @@ public class BigMonster extends Monster{
             Scanner sc = new Scanner(System.in);
             int ans = sc.nextInt();
             if (trueAnswer == ans) {
-                System.out.println("Верно! Ты победил монстра");
+                System.out.println("Верно! Ты победил большого монстра");
                 return true;
             }
             System.out.println("Ты проиграл эту битву!");

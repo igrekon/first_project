@@ -5,6 +5,7 @@ public class Monster {
     private String image = "\uD83E\uDDDF\u200D";
     private final int x, y;
     Random r = new Random();
+    Random k = new Random();
 
     Monster(int sizeBoard){
         this.y = r.nextInt(sizeBoard - 1);
@@ -40,7 +41,7 @@ public class Monster {
         Scanner sc = new Scanner(System.in);
         int ans = sc.nextInt();
         if (trueAnswer == ans) {
-            System.out.println("Верно! Ты победил монстра");
+            System.out.println("Верно! Ты победил Классическогомонстра");
             return true;
         }
         System.out.println("Ты проиграл эту битву!");
